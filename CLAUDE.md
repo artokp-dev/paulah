@@ -79,7 +79,7 @@ site/                ← 공개되는 사이트
 | reception.jpg | 리셉션/로비 |
 | doctor-kim-yulhyun.jpg | 김율현 원장 (안경, 골든리트리버 강아지) |
 | doctor-kim-pyeong.jpg | 김평 원장 (안경 없음) |
-| doctor-kim-serim.jpg | 김세림 원장 |
+| doctor-kim-serim.jpg | 김세림 내과과장 |
 | doctor-kim-jongwan.jpg | 김종완 진료수의사 |
 | facility-echo.jpg | 심장초음파 진료 장면 |
 | facility-operating-room.jpg | 수술실 |
@@ -114,7 +114,7 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
 |---|---|---|
 | 김율현 | 원장 | 치과, 외과·일반내과, 노령동물, 특수동물 |
 | 김평 | 원장 | 심장·내과, 노령동물 만성질환, 건강검진 |
-| 김세림 | 원장 | 건강검진·예방의학, 심장초음파, 내과 심화 |
+| 김세림 | **내과과장** (원장 아님, 2026-10-22 정정) | 건강검진·예방의학, 심장초음파, 내과 심화 |
 | 김종완 | 진료수의사 | 중증·응급, 내과·영상진단, 건국대 수의대 |
 
 ## SEO 현황
