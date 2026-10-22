@@ -79,7 +79,7 @@ site/                ← 공개되는 사이트
 | reception.jpg | 리셉션/로비 |
 | doctor-kim-yulhyun.jpg | 김율현 원장 (안경, 골든리트리버 강아지) |
 | doctor-kim-pyeong.jpg | 김평 원장 (안경 없음) |
-| doctor-kim-serim.jpg | 김세림 원장 |
+| doctor-kim-serim.jpg | 김세림 내과과장 |
 | doctor-kim-jongwan.jpg | 김종완 진료수의사 |
 | facility-echo.jpg | 심장초음파 진료 장면 |
 | facility-operating-room.jpg | 수술실 |
@@ -87,7 +87,7 @@ site/                ← 공개되는 사이트
 | blog-dog-checkup.jpg / blog-cat-checkup.jpg | 2026 건강검진 프로그램 카드 |
 | blog-night-er.jpg | 야간응급 블로그 카드 (복도 고양이 액자) |
 | logo-nav.webp | 상단 로고 (라인 로고) |
-| logo-footer.jpg | 하단 로고 (십자가+고양이 로고) |
+| logo-footer.jpg | 하단 로고 (2026 새 로고 심볼, apple-touch-icon과 같은 그림. src에 ?v=2) |
 
 이미지를 교체하면 파일명은 유지한다. og-image를 바꾸면 index.html의 `og-image.jpg?v=N` 버전을 올린다.
 
@@ -106,6 +106,7 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
   '전문성을 갖춘' 같은 서술형은 허용.
 - 과장된 직함·수식 금지. 담백한 톤.
 - 의료 효과를 단정하는 표현 금지 ("완치", "100%" 등).
+- 진료 시간 표현은 **"24시간 수의사 상주 · 언제든 진료 가능"**. "야간 수의사 상주 · 오후 9시~오전 9시"는 쓰지 않는다 (원장님 요청 2026-10-22).
 
 ## 의료진
 
@@ -113,7 +114,7 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
 |---|---|---|
 | 김율현 | 원장 | 치과, 외과·일반내과, 노령동물, 특수동물 |
 | 김평 | 원장 | 심장·내과, 노령동물 만성질환, 건강검진 |
-| 김세림 | 원장 | 건강검진·예방의학, 심장초음파, 내과 심화 |
+| 김세림 | **내과과장** (원장 아님, 2026-10-22 정정) | 건강검진·예방의학, 심장초음파, 내과 심화 |
 | 김종완 | 진료수의사 | 중증·응급, 내과·영상진단, 건국대 수의대 |
 
 ## SEO 현황

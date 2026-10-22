@@ -30,7 +30,7 @@ TOPICS = [
     ('checkup', '건강검진', 'i-checkup', '나이별 검진 주기 · 3단계 프로그램'),
     ('heart', '심장 · 노령동물 내과', 'i-heart', '심장초음파 · 만성질환 관리'),
     ('dental', '치과 · 스케일링', 'i-tooth', '스케일링 · 발치 · 치주 치료'),
-    ('emergency', '24시 응급 · 오시는 길', 'i-emergency', '야간 수의사 상주 · 위치 안내'),
+    ('emergency', '24시 응급 · 오시는 길', 'i-emergency', '24시간 수의사 상주 · 위치 안내'),
 ]
 
 CLINIC = {
@@ -203,7 +203,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
 
 <section class="sp-band">
   <h2>궁금한 점은 편하게 물어보세요</h2>
-  <p>365일 24시간 진료 · 야간 수의사 상주(오후 9시 ~ 오전 9시)<br>경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층</p>
+  <p>365일 24시간 진료 · 24시간 수의사 상주<br>경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층</p>
   <div class="sp-cta">
     <a href="tel:031-717-7558" class="bpg"><svg class="ic"><use href="#i-phone"></use></svg> 031-717-7558</a>
     <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" rel="noopener" class="bkk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
@@ -214,13 +214,13 @@ def page_html(slug, meta, hero, main, sprite, ver):
 <footer>
   <div class="flr">
     <div style="width:34px;height:34px;border-radius:8px;overflow:hidden;border:1px solid rgba(200,169,110,0.28);flex-shrink:0;">
-      <img loading="lazy" decoding="async" src="../images/logo-footer.jpg" alt="폴 동물병원 로고" style="width:100%;height:100%;object-fit:cover;">
+      <img loading="lazy" decoding="async" src="../images/logo-footer.jpg?v=2" alt="폴 동물병원 로고" style="width:100%;height:100%;object-fit:cover;">
     </div>
     <div class="fln">폴 동물병원 · PAUL ANIMAL HOSPITAL</div>
   </div>
   <strong>24시 폴 동물병원 (Paul Animal Hospital)</strong><br>
   경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층 · TEL: <a href="tel:031-717-7558" style="color:inherit;font-weight:700;text-decoration:none;">031-717-7558</a><br>
-  365일 24시간 진료 · 야간 진료 오후 9시 ~ 오전 9시<br>
+  365일 24시간 진료 · 24시간 수의사 상주<br>
   <div class="ftopics">진료 안내: {foot_topics}</div>
   인스타그램: <a href="https://www.instagram.com/24paulah" target="_blank" rel="noopener" style="color:var(--gold);">@24paulah</a> · 블로그: <a href="https://blog.naver.com/hwrat" target="_blank" rel="noopener">blog.naver.com/hwrat</a><br><br>
   <span style="font-size:0.69rem;color:rgba(255,255,255,0.16);">© 2026 Paul Animal Hospital. All rights reserved.</span>
