@@ -22,6 +22,8 @@ SITE = ROOT / 'site'
 PAGES = ROOT / 'tools' / 'pages'
 DOMAIN = 'https://paulah.co.kr'
 TODAY = datetime.date.today().isoformat()
+PUBLISHED = '2026-10-22'  # 진료 안내 페이지 최초 게시일
+TODAY_KO = f'{int(TODAY[:4])}년 {int(TODAY[5:7])}월 {int(TODAY[8:])}일'
 FONT = ('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900'
         '&family=Noto+Serif+KR:wght@400;600;700&display=swap')
 
@@ -101,7 +103,10 @@ def page_html(slug, meta, hero, main, sprite, ver):
             'isPartOf': {'@type': 'WebSite', '@id': f'{DOMAIN}/#website', 'name': '24시 폴 동물병원', 'url': f'{DOMAIN}/'},
             'about': {'@id': f'{DOMAIN}/#clinic'},
             'primaryImageOfPage': {'@type': 'ImageObject', 'url': f'{DOMAIN}/og-image.jpg?v=2'},
+            'datePublished': PUBLISHED,
             'dateModified': TODAY,
+            'author': {'@id': f'{DOMAIN}/#clinic'},
+            'publisher': {'@id': f'{DOMAIN}/#clinic'},
             'breadcrumb': {'@id': url + '#breadcrumb'},
         },
         {
@@ -153,13 +158,14 @@ def page_html(slug, meta, hero, main, sprite, ver):
 <link href="{FONT}" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css?v={ver}">
 <link rel="stylesheet" href="../assets/page.css?v={ver}">
+<link rel="alternate" type="application/rss+xml" title="24시 폴 동물병원" href="{DOMAIN}/rss.xml">
 </head>
 <body>{sprite}
 
 <!-- 이 파일은 tools/build.py 가 tools/pages/{slug}.html 로 만든 결과물입니다. 문구는 원고 파일에서 고치세요. -->
 <nav id="topnav">
   <a href="../" class="nl">
-    <div class="nlm-img" style="background:#0D1F3C;display:flex;align-items:center;justify-content:center;"><img src="../images/logo-nav.webp" alt="폴 동물병원" style="width:100%;height:100%;object-fit:contain;"></div>
+    <div class="nlm-img" style="background:#0D1F3C;display:flex;align-items:center;justify-content:center;"><img src="../images/logo-nav.webp" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
     <div><div class="nn">폴 동물병원</div><div class="ne">PAUL ANIMAL HOSPITAL</div></div>
   </a>
   <ul class="nls">
@@ -183,6 +189,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
     <div class="sp-crumb"><a href="../">24시 폴 동물병원</a><span>›</span><span>{e(meta['crumb'])}</span></div>
     <p class="ey">{e(meta['eyebrow'])}</p>
     <h1 class="sp-h1">{meta['h1']}</h1>
+    <p class="sp-meta">작성 · 24시 폴 동물병원 수의사 &nbsp;|&nbsp; 최종 수정 <time datetime="{TODAY}">{TODAY_KO}</time></p>
 {hero.strip()}
   </div>
 </header>
@@ -197,7 +204,6 @@ def page_html(slug, meta, hero, main, sprite, ver):
 {topic_cards}
       </div>
     </section>
-    <p class="sp-updated">최종 수정 {TODAY}</p>
   </div>
 </main>
 
@@ -260,8 +266,44 @@ def main():
         out.parent.mkdir(exist_ok=True)
         out.write_text(page_html(slug, meta, hero, main_html, sprite, ver), encoding='utf-8')
         built.append((slug, len(faq_items(main_html)), len(meta['title']), len(meta['description'])))
+    write_rss(index_html)
     for slug, nfaq, lt, ld in built:
         print(f'{slug:10s}  FAQ {nfaq}개  제목 {lt}자  설명 {ld}자')
+
+
+def write_rss(index_html):
+    """네이버 서치어드바이저 RSS 제출용 피드 (메인 + 진료 안내 페이지)"""
+    from email.utils import format_datetime
+    pub = format_datetime(datetime.datetime(*map(int, TODAY.split('-')), 9, 0,
+                                            tzinfo=datetime.timezone(datetime.timedelta(hours=9))))
+    items = []
+    t = re.search(r'<title>(.*?)</title>', index_html).group(1)
+    d = re.search(r'<meta name="description" content="(.*?)">', index_html).group(1)
+    items.append((t, f'{DOMAIN}/', d))
+    for f in sorted(PAGES.glob('*.html')):
+        meta = json.loads(re.search(r'<!--META(.*?)META-->', f.read_text(encoding='utf-8'), re.S).group(1))
+        items.append((meta['title'], f'{DOMAIN}/{f.stem}/', meta['description']))
+    e = html.escape
+    body = '\n'.join(f"""    <item>
+      <title>{e(t)}</title>
+      <link>{u}</link>
+      <guid>{u}</guid>
+      <description>{e(d)}</description>
+      <pubDate>{pub}</pubDate>
+    </item>""" for t, u, d in items)
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>24시 폴 동물병원</title>
+    <link>{DOMAIN}/</link>
+    <description>분당 정자동 365일 24시간 수의사 상주 동물병원 진료 안내</description>
+    <language>ko</language>
+    <lastBuildDate>{pub}</lastBuildDate>
+{body}
+  </channel>
+</rss>
+"""
+    (SITE / 'rss.xml').write_text(xml, encoding='utf-8')
 
 
 if __name__ == '__main__':

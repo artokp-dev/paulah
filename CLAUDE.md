@@ -26,6 +26,8 @@ site/                ← 공개되는 사이트
   assets/base.css    index.html <style> 자동 복사본 (직접 수정 금지)
   assets/page.css    진료 안내 페이지 전용 스타일
   llms.txt           AI 검색용 병원 요약
+  rss.xml            네이버 RSS 제출용 피드 (build.py가 자동 생성)
+  14df6dda63ade1e438f73be0740d05b2.txt   IndexNow 키 파일 (빙·ChatGPT 색인 요청용, 지우지 말 것)
   images/            사진 14장 (외부 파일)
   favicon.ico        16/32/48/64 멀티사이즈
   favicon-16.png, favicon-32.png
@@ -118,6 +120,12 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
 | 김종완 | 진료수의사 | 중증·응급, 내과·영상진단, 건국대 수의대 |
 
 ## SEO 현황
+
+- robots.txt: 네이버(Yeti)·다음·구글·빙·AI 검색 크롤러(OAI-SearchBot, Claude-SearchBot, PerplexityBot 등) 명시 허용
+- 안내 페이지에 "작성 · 24시 폴 동물병원 수의사 | 최종 수정일" 표시 (네이버 AI 브리핑은 작성·수정일 명시를 권장)
+- 메인 구조화 데이터에 의료진 4명 Person(employee) 포함
+- 2026 트렌드 메모: 네이버 AI 브리핑 출처의 약 80%가 네이버 내부(블로그·지도·플레이스), 구글 AI 요약은 구글 비즈니스 프로필이 1순위,
+  ChatGPT는 빙 색인 사용 → 홈페이지보다 플레이스·블로그·구글 비즈니스 프로필·빙 웹마스터 등록이 더 큰 효과
 
 - 네이버 서치어드바이저 등록 + 사이트맵 제출 ✅ (인증: `6442f436681a37ef7fe920069521652b`)
 - 구글 서치콘솔 DNS TXT 인증 + 사이트맵 제출 ✅ (메타: `fb2IMgi83T_PYPyM84LkgRmpzPlgItX_kkPykhau4JI`)

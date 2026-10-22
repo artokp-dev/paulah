@@ -3,6 +3,7 @@
    base.css(메인 페이지 스타일 복사본) 위에 얹어서 씁니다.
 ══════════════════════════════════════════════════ */
 body{background:#f7f7f4;}
+:root{--tl:#6b6b85;}  /* 안내 페이지는 회색 글씨를 한 단계 진하게 (가독성) */
 .sp-wrap{max-width:880px;margin:0 auto;}
 
 /* ── 상단 소개 ── */
@@ -10,15 +11,15 @@ body{background:#f7f7f4;}
 .sp-crumb{font-size:0.76rem;color:var(--tl);margin-bottom:22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
 .sp-crumb a{color:var(--navy);text-decoration:none;}
 .sp-crumb a:hover{text-decoration:underline;}
-.sp-hero .ey{color:#9a7628;}
+.sp-hero .ey{color:#85651f;}
 .sp-h1{font-family:"Noto Serif KR",serif;font-size:clamp(1.9rem,4.2vw,2.75rem);color:var(--navy-dark);font-weight:700;line-height:1.3;margin-bottom:20px;word-break:keep-all;}
 .sp-lead{font-size:1rem;color:var(--tm);line-height:1.95;max-width:700px;word-break:keep-all;}
 .sp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
 .sp-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:#fff;border:1px solid rgba(26,58,107,0.14);padding:7px 14px;border-radius:20px;}
-.sp-chip .ic{color:#9a7628;}
+.sp-chip .ic{color:#85651f;}
 .sp-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
 .sp-cta .bpg,.sp-cta .bkk,.sp-cta .bnv{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;font-size:0.9rem;}
-.bnv{background:#03C75A;color:#fff;border-radius:32px;font-weight:700;text-decoration:none;box-shadow:0 4px 22px rgba(3,199,90,0.28);transition:transform 0.22s;}
+.bnv{background:#007f3e;color:#fff;border-radius:32px;font-weight:700;text-decoration:none;box-shadow:0 4px 22px rgba(3,199,90,0.28);transition:transform 0.22s;}
 .bnv:hover{transform:translateY(-3px);}
 .bnv b{font-weight:900;}
 
@@ -35,10 +36,10 @@ body{background:#f7f7f4;}
 
 /* 한눈에 보기 */
 .sp-sum{background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:20px;padding:26px 28px;box-shadow:0 6px 26px rgba(20,42,100,0.05);}
-.sp-sum-t{font-size:0.72rem;letter-spacing:0.2em;color:#9a7628;font-weight:700;margin-bottom:14px;}
+.sp-sum-t{font-size:0.72rem;letter-spacing:0.2em;color:#85651f;font-weight:700;margin-bottom:14px;}
 .sp-sum dl{display:grid;grid-template-columns:132px 1fr;gap:0;}
 .sp-sum dt,.sp-sum dd{padding:11px 0;border-top:1px solid rgba(26,58,107,0.07);font-size:0.9rem;line-height:1.7;}
-.sp-sum dt{color:var(--tl);font-weight:500;}
+.sp-sum dt{color:#5f5f7a;font-weight:500;}
 .sp-sum dd{color:var(--navy-dark);font-weight:500;word-break:keep-all;}
 .sp-sum dd a{color:var(--navy);font-weight:700;}
 .sp-sum dl > :nth-child(-n+2){border-top:none;}
@@ -72,7 +73,7 @@ body{background:#f7f7f4;}
 /* 카드 3열 */
 .sp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 14px;}
 .sp-card{background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:18px;padding:22px 20px;}
-.sp-card > .ic{font-size:1.4rem;color:#9a7628;margin-bottom:12px;}
+.sp-card > .ic{font-size:1.4rem;color:#85651f;margin-bottom:12px;}
 .sp-card h3{font-family:"Noto Serif KR",serif;font-size:1rem;color:var(--navy-dark);margin-bottom:8px;}
 .sp-card p{font-size:0.85rem!important;line-height:1.85!important;margin:0!important;}
 .sp-card .ck-btns{margin-top:14px;}
@@ -82,7 +83,7 @@ body{background:#f7f7f4;}
 .sp-doc{display:flex;gap:16px;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:18px;padding:18px;align-items:flex-start;}
 .sp-doc img{width:84px;height:100px;border-radius:12px;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(200,169,110,0.55);}
 .sp-doc-n{font-family:"Noto Serif KR",serif;font-size:1.05rem;font-weight:700;color:var(--navy-dark);}
-.sp-doc-n span{font-family:"Noto Sans KR",sans-serif;font-size:0.76rem;color:#9a7628;font-weight:700;margin-left:6px;}
+.sp-doc-n span{font-family:"Noto Sans KR",sans-serif;font-size:0.76rem;color:#85651f;font-weight:700;margin-left:6px;}
 .sp-doc .dctags{margin-top:8px;}
 .sp-sec .sp-doc-c{font-size:0.78rem;color:var(--tl);line-height:1.7;margin:8px 0 0;}
 
@@ -92,6 +93,7 @@ body{background:#f7f7f4;}
 /* 블로그 */
 .sp-blogs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
 .sp-blogs .blog-thumb{height:150px;}
+.sp-blogs .blog-tag{color:#85651f;}
 .sp-blogs .blog-body{padding:18px 18px 20px;}
 .sp-blog-txt{display:flex;flex-direction:column;justify-content:center;min-height:150px;background:linear-gradient(160deg,#f2f6ff,#e6eefc);padding:22px;}
 
@@ -124,7 +126,7 @@ body{background:#f7f7f4;}
 .sp-topic span{display:block;color:var(--tl);font-size:0.76rem;margin-top:4px;line-height:1.6;}
 .sp-topic.on{border-color:var(--gold);background:#fffaf0;pointer-events:none;}
 
-.sp-updated{font-size:0.76rem;color:var(--tl);text-align:right;margin-top:-30px;margin-bottom:40px;}
+.sp-meta{font-size:0.78rem;color:#6b6b85;margin:-6px 0 18px;}
 
 @media(max-width:760px){
   .sp-hero{padding:104px 5% 44px;}
