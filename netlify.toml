@@ -1,0 +1,15 @@
+# Netlify가 site/ 폴더만 공개합니다. (CLAUDE.md 등 문서는 공개되지 않음)
+[build]
+  publish = "site"
+  command = ""
+
+# 캐시: HTML은 항상 최신, 이미지/아이콘은 1주일
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
