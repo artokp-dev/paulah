@@ -1,0 +1,141 @@
+/* ══════════════════════════════════════════════════
+   진료 안내 페이지 공통 스타일 (2026-10-22)
+   base.css(메인 페이지 스타일 복사본) 위에 얹어서 씁니다.
+══════════════════════════════════════════════════ */
+body{background:#f7f7f4;}
+.sp-wrap{max-width:880px;margin:0 auto;}
+
+/* ── 상단 소개 ── */
+.sp-hero{padding:132px 5% 60px;background:linear-gradient(165deg,#eef3fc 0%,#f3f6fc 55%,#f7f7f4 100%);border-bottom:1px solid rgba(26,58,107,0.07);}
+.sp-crumb{font-size:0.76rem;color:var(--tl);margin-bottom:22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.sp-crumb a{color:var(--navy);text-decoration:none;}
+.sp-crumb a:hover{text-decoration:underline;}
+.sp-hero .ey{color:#9a7628;}
+.sp-h1{font-family:"Noto Serif KR",serif;font-size:clamp(1.9rem,4.2vw,2.75rem);color:var(--navy-dark);font-weight:700;line-height:1.3;margin-bottom:20px;word-break:keep-all;}
+.sp-lead{font-size:1rem;color:var(--tm);line-height:1.95;max-width:700px;word-break:keep-all;}
+.sp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.sp-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:#fff;border:1px solid rgba(26,58,107,0.14);padding:7px 14px;border-radius:20px;}
+.sp-chip .ic{color:#9a7628;}
+.sp-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.sp-cta .bpg,.sp-cta .bkk,.sp-cta .bnv{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;font-size:0.9rem;}
+.bnv{background:#03C75A;color:#fff;border-radius:32px;font-weight:700;text-decoration:none;box-shadow:0 4px 22px rgba(3,199,90,0.28);transition:transform 0.22s;}
+.bnv:hover{transform:translateY(-3px);}
+.bnv b{font-weight:900;}
+
+/* ── 본문 ── */
+.sp-main{padding:56px 5% 24px;}
+.sp-sec{margin-bottom:68px;}
+.sp-h2{font-family:"Noto Serif KR",serif;font-size:clamp(1.3rem,2.6vw,1.6rem);color:var(--navy-dark);font-weight:700;line-height:1.4;margin-bottom:18px;word-break:keep-all;}
+.sp-h2::before{content:"";display:block;width:28px;height:2px;background:var(--gold);margin-bottom:14px;}
+.sp-h3{font-size:1rem;color:var(--navy-dark);font-weight:700;margin:28px 0 10px;}
+.sp-sec p{font-size:0.95rem;color:var(--tm);line-height:2;margin-bottom:14px;word-break:keep-all;}
+.sp-sec p strong,.sp-sec li strong{color:var(--navy);font-weight:700;}
+.sp-sec a:not([class]){color:var(--navy);font-weight:600;}
+.sp-note{font-size:0.84rem!important;color:var(--tl)!important;}
+
+/* 한눈에 보기 */
+.sp-sum{background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:20px;padding:26px 28px;box-shadow:0 6px 26px rgba(20,42,100,0.05);}
+.sp-sum-t{font-size:0.72rem;letter-spacing:0.2em;color:#9a7628;font-weight:700;margin-bottom:14px;}
+.sp-sum dl{display:grid;grid-template-columns:132px 1fr;gap:0;}
+.sp-sum dt,.sp-sum dd{padding:11px 0;border-top:1px solid rgba(26,58,107,0.07);font-size:0.9rem;line-height:1.7;}
+.sp-sum dt{color:var(--tl);font-weight:500;}
+.sp-sum dd{color:var(--navy-dark);font-weight:500;word-break:keep-all;}
+.sp-sum dd a{color:var(--navy);font-weight:700;}
+.sp-sum dl > :nth-child(-n+2){border-top:none;}
+
+/* 체크 리스트 */
+.sp-list{list-style:none;display:grid;gap:10px;margin:6px 0 10px;}
+.sp-list li{position:relative;padding:14px 18px 14px 50px;background:#fff;border:1px solid rgba(26,58,107,0.09);border-radius:14px;font-size:0.92rem;color:var(--td);line-height:1.7;word-break:keep-all;}
+.sp-list li::before{content:"";position:absolute;left:18px;top:17px;width:20px;height:20px;border-radius:50%;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a7a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat;}
+.sp-list.warn li::before{background:#fdeceb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b4341f' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 6v8M12 18.5v.01'/%3E%3C/svg%3E") center/12px no-repeat;}
+.sp-list.warn li{border-color:rgba(180,52,31,0.16);}
+.sp-list small{display:block;color:var(--tl);font-size:0.8rem;margin-top:2px;}
+
+/* 표 */
+.sp-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:16px;overflow:hidden;margin:6px 0 14px;font-size:0.9rem;}
+.sp-table th,.sp-table td{padding:14px 18px;text-align:left;border-top:1px solid rgba(26,58,107,0.07);line-height:1.7;vertical-align:top;word-break:keep-all;}
+.sp-table thead th{background:#eef3fc;color:var(--navy-dark);font-weight:700;border-top:none;font-size:0.84rem;}
+.sp-table td:first-child{color:var(--navy-dark);font-weight:600;white-space:nowrap;}
+.sp-table td{color:var(--tm);}
+
+/* 단계 */
+.sp-steps{list-style:none;counter-reset:st;display:grid;gap:12px;}
+.sp-steps li{counter-increment:st;position:relative;background:#fff;border:1px solid rgba(26,58,107,0.09);border-radius:16px;padding:18px 20px 18px 66px;font-size:0.9rem;color:var(--tm);line-height:1.85;word-break:keep-all;}
+.sp-steps li::before{content:counter(st);position:absolute;left:20px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:0.85rem;display:flex;align-items:center;justify-content:center;}
+.sp-steps li b{display:block;color:var(--navy-dark);font-size:0.97rem;margin-bottom:2px;}
+
+/* 팁 박스 */
+.sp-tip{background:linear-gradient(135deg,#fffaf0,#fdf3df);border:1px solid rgba(200,169,110,0.4);border-left:4px solid var(--gold);border-radius:14px;padding:18px 22px;margin:16px 0;}
+.sp-tip p{margin:0!important;font-size:0.9rem!important;color:#5a4518!important;}
+.sp-tip b{color:#7d5a12;}
+
+/* 카드 3열 */
+.sp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 14px;}
+.sp-card{background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:18px;padding:22px 20px;}
+.sp-card > .ic{font-size:1.4rem;color:#9a7628;margin-bottom:12px;}
+.sp-card h3{font-family:"Noto Serif KR",serif;font-size:1rem;color:var(--navy-dark);margin-bottom:8px;}
+.sp-card p{font-size:0.85rem!important;line-height:1.85!important;margin:0!important;}
+.sp-card .ck-btns{margin-top:14px;}
+
+/* 의료진 */
+.sp-docs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.sp-doc{display:flex;gap:16px;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:18px;padding:18px;align-items:flex-start;}
+.sp-doc img{width:84px;height:100px;border-radius:12px;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(200,169,110,0.55);}
+.sp-doc-n{font-family:"Noto Serif KR",serif;font-size:1.05rem;font-weight:700;color:var(--navy-dark);}
+.sp-doc-n span{font-family:"Noto Sans KR",sans-serif;font-size:0.76rem;color:#9a7628;font-weight:700;margin-left:6px;}
+.sp-doc .dctags{margin-top:8px;}
+.sp-sec .sp-doc-c{font-size:0.78rem;color:var(--tl);line-height:1.7;margin:8px 0 0;}
+
+/* FAQ — base.css의 .faq-item 재사용 */
+.sp-sec .faq-list{gap:10px;}
+
+/* 블로그 */
+.sp-blogs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.sp-blogs .blog-thumb{height:150px;}
+.sp-blogs .blog-body{padding:18px 18px 20px;}
+.sp-blog-txt{display:flex;flex-direction:column;justify-content:center;min-height:150px;background:linear-gradient(160deg,#f2f6ff,#e6eefc);padding:22px;}
+
+/* 오시는 길 */
+.sp-loc{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+.sp-addr{background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:18px;padding:22px 24px;font-size:0.92rem;color:var(--tm);line-height:1.95;}
+.sp-addr b{color:var(--navy-dark);font-size:1rem;}
+.map-link-title{font-weight:700;color:var(--navy-dark);font-size:0.95rem;}
+.map-link-sub{font-size:0.78rem;color:var(--tl);}
+.map-link-arrow{margin-left:auto;color:var(--tl);}
+
+/* 큰 전화 카드 (응급) */
+.sp-call{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(135deg,#16305f 0%,#1e3a7a 50%,#2a5298 100%);border-radius:20px;padding:26px 28px;color:#fff;text-decoration:none;margin-top:28px;box-shadow:0 12px 34px rgba(20,42,100,0.22);}
+.sp-call-l{font-size:0.8rem;color:rgba(255,255,255,0.7);}
+.sp-call-n{font-family:"Noto Serif KR",serif;font-size:clamp(1.6rem,4vw,2.1rem);font-weight:700;letter-spacing:0.02em;}
+.sp-call-d{font-size:0.82rem;color:rgba(255,255,255,0.75);margin-left:auto;max-width:300px;line-height:1.7;}
+
+/* 하단 상담 띠 */
+.sp-band{background:linear-gradient(135deg,#16305f 0%,#1e3a7a 45%,#2a5298 100%);padding:60px 5%;text-align:center;color:#fff;}
+.sp-band h2{font-family:"Noto Serif KR",serif;font-size:clamp(1.35rem,3vw,1.8rem);font-weight:700;margin-bottom:10px;}
+.sp-band p{color:rgba(255,255,255,0.72);font-size:0.9rem;line-height:1.9;margin-bottom:26px;}
+.sp-band .sp-cta{justify-content:center;margin-top:0;}
+
+/* 다른 진료 안내 */
+.sp-topics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.sp-topic{display:block;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:16px;padding:18px;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;}
+.sp-topic:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(20,42,100,0.1);}
+.sp-topic .ic{font-size:1.25rem;color:var(--navy);}
+.sp-topic b{display:block;color:var(--navy-dark);font-size:0.92rem;margin-top:10px;}
+.sp-topic span{display:block;color:var(--tl);font-size:0.76rem;margin-top:4px;line-height:1.6;}
+.sp-topic.on{border-color:var(--gold);background:#fffaf0;pointer-events:none;}
+
+.sp-updated{font-size:0.76rem;color:var(--tl);text-align:right;margin-top:-30px;margin-bottom:40px;}
+
+@media(max-width:760px){
+  .sp-hero{padding:104px 5% 44px;}
+  .sp-sum{padding:20px 20px;}
+  .sp-sum dl{grid-template-columns:1fr;}
+  .sp-sum dt{padding-bottom:0;}
+  .sp-sum dd{border-top:none;padding-top:2px;}
+  .sp-sum dl > :nth-child(2){border-top:none;}
+  .sp-cards,.sp-docs,.sp-loc{grid-template-columns:1fr;}
+  .sp-topics{grid-template-columns:1fr 1fr;}
+  .sp-table td:first-child{white-space:normal;}
+  .sp-call-d{margin-left:0;}
+  .sp-main{padding-top:44px;}
+}
