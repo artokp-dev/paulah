@@ -16,8 +16,16 @@ GitHub (artokp-dev/paulah)  ──push──▶  Netlify  ──▶  https://pau
 ```
 CLAUDE.md            이 문서 (비공개)
 netlify.toml         배포 설정 (비공개)
+tools/               (비공개)
+  build.py           진료 안내 페이지 생성기
+  pages/*.html       진료 안내 페이지 원고 ← 문구는 여기서 고친다
+  check.py           렌더 검증 (JS 에러·깨진 이미지·죽은 링크·가로 스크롤)
 site/                ← 공개되는 사이트
-  index.html         단일 페이지, 약 100KB
+  index.html         메인 원페이지, 약 100KB (CSS는 <style> 인라인)
+  checkup/ heart/ dental/ emergency/   진료 안내 페이지 (build.py 결과물)
+  assets/base.css    index.html <style> 자동 복사본 (직접 수정 금지)
+  assets/page.css    진료 안내 페이지 전용 스타일
+  llms.txt           AI 검색용 병원 요약
   images/            사진 14장 (외부 파일)
   favicon.ico        16/32/48/64 멀티사이즈
   favicon-16.png, favicon-32.png
@@ -28,6 +36,27 @@ site/                ← 공개되는 사이트
   naver6442f436681a37ef7fe920069521652b.html    네이버 소유확인 (현재)
   navere162167ea930c64cb51b04d8ffed2905.html    네이버 소유확인 (구, 남겨둠)
 ```
+
+## 진료 안내 페이지 (2026-10-22 추가, AI 검색 최적화)
+
+| 주소 | 내용 |
+|---|---|
+| /checkup/ | 건강검진 — 나이별 주기, 3단계 프로그램, 진행 과정 |
+| /heart/ | 심장·노령동물 내과 — 심장초음파, 당뇨·쿠싱·신장 |
+| /dental/ | 치과·스케일링 — 신호, 마취 이유, 집 관리 |
+| /emergency/ | 24시 응급·오시는 길 — 응급 증상, 위험 음식, 위치 |
+
+작업 순서:
+1. 문구 수정 → `tools/pages/<slug>.html` (META 안 title 40자·description 80자 이내)
+2. `python3 tools/build.py` → site/<slug>/index.html 재생성 + base.css 갱신
+   (index.html의 <style>을 고쳤으면 반드시 다시 실행)
+3. `python3 tools/check.py /tmp/out / /checkup/ /heart/ /dental/ /emergency/` → TOTAL PROBLEMS: 0 확인
+4. FAQ 구조화 데이터는 화면의 `<details class="faq-item">`에서 자동 생성된다.
+   index.html의 FAQ를 고치면 FAQPage JSON-LD도 같이 고친다.
+5. 새 페이지를 추가하면 build.py의 TOPICS, sitemap.xml, llms.txt, index.html 푸터에도 넣는다.
+
+블로그 글을 홈페이지에 그대로 복사하지 않는다 (네이버 유사문서 판정 위험). 요약 + 블로그 링크 방식.
+사이트·블로그에 없는 사실(주차, 비용, 소요 시간 등)은 원장님 확인 전까지 쓰지 않는다.
 
 ## 기본 정보
 
@@ -92,7 +121,8 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
 - 네이버 서치어드바이저 등록 + 사이트맵 제출 ✅ (인증: `6442f436681a37ef7fe920069521652b`)
 - 구글 서치콘솔 DNS TXT 인증 + 사이트맵 제출 ✅ (메타: `fb2IMgi83T_PYPyM84LkgRmpzPlgItX_kkPykhau4JI`)
 - title 30자 / description 67자 (네이버 권장 40/80자 이내)
-- 구조화 데이터: VeterinaryCare + FAQPage
+- 구조화 데이터: 메인 = VeterinaryCare + FAQPage + WebSite / 안내 페이지 = WebPage + BreadcrumbList + FAQPage
+- 메인에 남아 있는 영문 `SPECIALTY` 배지(진료과목·시설)와 '치과 Specialty'는 '전문'과 같은 뜻이라 광고 심의상 애매함 — 원장님 판단 대기
 - og:image = 병원 외관 사진 (로고는 잘리면 파란 사각형만 남아서 안 씀)
 
 진단은 반드시 **`https://paulah.co.kr`** (www 없이)로 할 것.
@@ -114,6 +144,6 @@ www는 apex로 301 리다이렉트되어 "robots.txt 없음" 같은 거짓 경�
 
 ## 검토 중
 
-- 페이지 분리 / AI 검색 최적화(GEO) — 진행 여부 원장님 결정 대기
+- AI 검색 최적화 반영 완료 (2026-10-22, PR #1). 미답변: 고양이 대기공간 분리, 심장초음파 무마취, 주차, 고양이 치과 블로그 제목, SPECIALTY 배지
 - 네이버 검색결과 이미지 노출 대기 (1~2주)
 - 네이버 플레이스에 새 인테리어 사진·로고·김종완 수의사 반영 여부 점검
