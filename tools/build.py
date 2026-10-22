@@ -42,7 +42,7 @@ CLINIC = {
     'image': f'{DOMAIN}/og-image.jpg?v=2',
     'address': {
         '@type': 'PostalAddress',
-        'streetAddress': '성남대로 385 분당클리닉빌딩 1층',
+        'streetAddress': '성남대로 385 분당클리닉빌딩 1층 102호',
         'addressLocality': '성남시 분당구',
         'addressRegion': '경기도',
         'addressCountry': 'KR',
@@ -203,7 +203,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
 
 <section class="sp-band">
   <h2>궁금한 점은 편하게 물어보세요</h2>
-  <p>365일 24시간 진료 · 24시간 수의사 상주<br>경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층</p>
+  <p>365일 24시간 진료 · 24시간 수의사 상주<br>경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층 102호</p>
   <div class="sp-cta">
     <a href="tel:031-717-7558" class="bpg"><svg class="ic"><use href="#i-phone"></use></svg> 031-717-7558</a>
     <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" rel="noopener" class="bkk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
@@ -219,7 +219,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
     <div class="fln">폴 동물병원 · PAUL ANIMAL HOSPITAL</div>
   </div>
   <strong>24시 폴 동물병원 (Paul Animal Hospital)</strong><br>
-  경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층 · TEL: <a href="tel:031-717-7558" style="color:inherit;font-weight:700;text-decoration:none;">031-717-7558</a><br>
+  경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층 102호 · TEL: <a href="tel:031-717-7558" style="color:inherit;font-weight:700;text-decoration:none;">031-717-7558</a><br>
   365일 24시간 진료 · 24시간 수의사 상주<br>
   <div class="ftopics">진료 안내: {foot_topics}</div>
   인스타그램: <a href="https://www.instagram.com/24paulah" target="_blank" rel="noopener" style="color:var(--gold);">@24paulah</a> · 블로그: <a href="https://blog.naver.com/hwrat" target="_blank" rel="noopener">blog.naver.com/hwrat</a><br><br>

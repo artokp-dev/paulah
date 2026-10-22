@@ -1198,5 +1198,7 @@ body{animation:none!important;background:var(--cream)!important;}
 .ftopics{margin:4px 0 6px;}
 .ftopics a{color:rgba(255,255,255,0.78);text-decoration:none;margin:0 6px;}
 .ftopics a:hover{color:#fff;text-decoration:underline;}
+.park-note{font-size:0.8rem;color:var(--tm);line-height:1.85;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:14px;padding:13px 16px;margin-bottom:20px;}
+.park-note strong{display:block;color:var(--navy-dark);font-size:0.82rem;margin-bottom:2px;}
 /* 작은 휴대폰에서 상단 전화번호가 두 줄로 깨지는 것 방지 */
 @media(max-width:420px){.nt{white-space:nowrap;padding:7px 13px;font-size:0.82rem;}.ne{display:none;}}
