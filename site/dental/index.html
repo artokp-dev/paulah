@@ -262,4 +262,35 @@ function closeMenu(){document.getElementById('mobileMenu').classList.remove('ope
 const nav=document.getElementById('topnav');
 window.addEventListener('scroll',()=>{nav.style.boxShadow=window.scrollY>60?'0 4px 32px rgba(0,0,0,0.12)':'none';},{passive:true});
 </script>
+
+<!-- 네이버 광고 전환추적 (wcs.trans) · 공통키 s_859375249a1 · 광고계정 1732929 와 혼용 금지 -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+(function(){
+  if (!window.wcs) return;
+  if (location.hostname !== "paulah.co.kr") return;  /* 미리보기·테스트 주소에서는 수집 안 함 */
+  if (!window.wcs_add) window.wcs_add = {};
+  window.wcs_add["wa"] = "s_859375249a1";
+  wcs.inflow("paulah.co.kr");
+  wcs_do();                                   /* 페이지뷰: 로드당 1회 */
+  var MAP = [
+    {sel:'a[href^="tel:"]',         type:"custom001"},  /* 전화 버튼 클릭 */
+    {sel:'a[href*="pf.kakao.com"]', type:"custom002"},  /* 카카오 상담 이동 */
+    {sel:'a[href*="naver.me"]',     type:"custom003"}   /* 네이버 예약 이동 */
+  ];
+  var last = {};
+  document.addEventListener("click", function(e){
+    var a = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    for (var i = 0; i < MAP.length; i++){
+      if (!a.matches(MAP[i].sel)) continue;
+      var t = MAP[i].type, now = Date.now();
+      if (last[t] && now - last[t] < 1000) return;   /* 연타 중복 방지 */
+      last[t] = now;
+      try { var _conv = {}; _conv.type = t; wcs.trans(_conv); } catch(err){}
+      return;                                        /* 한 클릭 = 한 이벤트 */
+    }
+  }, true);
+})();
+</script>
 </body></html>
