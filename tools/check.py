@@ -62,7 +62,7 @@ with sync_playwright() as p:
             pg.screenshot(path=os.path.join(OUT, name), full_page=True)
             status = 'OK'
             # 샌드박스에서 Google Fonts 접속이 막혀 생기는 오류는 제외
-            errs = [e for e in errs if 'ERR_TUNNEL_CONNECTION_FAILED' not in e]
+            errs = [e for e in errs if 'ERR_TUNNEL_CONNECTION_FAILED' not in e and 'ERR_NAME_NOT_RESOLVED' not in e]  # 외부(구글폰트·네이버 wcslog) 차단
             issues = errs + bad + [f'깨진 이미지 {x}' for x in broken] + [f'죽은 링크 {x}' for x in dead]
             if ow > vw + 1:
                 issues.append(f'가로 스크롤 발생 (scrollWidth {ow} > {vw})')

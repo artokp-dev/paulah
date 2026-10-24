@@ -22,6 +22,16 @@ SITE = ROOT / 'site'
 PAGES = ROOT / 'tools' / 'pages'
 DOMAIN = 'https://paulah.co.kr'
 TODAY = datetime.date.today().isoformat()
+
+
+def page_date(src):
+    """'최종 수정일' = 원고 파일이 마지막으로 바뀐 날 (추적 코드 같은 틀 변경으로는 안 바뀜)"""
+    import subprocess
+    dirty = subprocess.run(['git', 'diff', '--quiet', 'HEAD', '--', str(src)], cwd=ROOT).returncode != 0
+    if dirty:
+        return TODAY
+    r = subprocess.run(['git', 'log', '-1', '--format=%cs', '--', str(src)], cwd=ROOT, capture_output=True, text=True)
+    return r.stdout.strip() or TODAY
 FONT = ('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900'
         '&family=Noto+Serif+KR:wght@400;600;700&display=swap')
 
@@ -91,7 +101,7 @@ NAV_ITEMS = [('#about', '병원 소개'), ('#doctors', '의료진'), ('#dept', '
              ('#equip', '시설·장비'), ('#blog', '블로그'), ('#faq', 'FAQ'), ('#contact', '오시는 길')]
 
 
-def page_html(slug, meta, hero, main, sprite, ver):
+def page_html(slug, meta, hero, main, sprite, ver, updated):
     url = f'{DOMAIN}/{slug}/'
     faqs = faq_items(main)
     graph = [
@@ -101,7 +111,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
             'isPartOf': {'@type': 'WebSite', '@id': f'{DOMAIN}/#website', 'name': '24시 폴 동물병원', 'url': f'{DOMAIN}/'},
             'about': {'@id': f'{DOMAIN}/#clinic'},
             'primaryImageOfPage': {'@type': 'ImageObject', 'url': f'{DOMAIN}/og-image.jpg?v=2'},
-            'dateModified': TODAY,
+            'dateModified': updated,
             'breadcrumb': {'@id': url + '#breadcrumb'},
         },
         {
@@ -197,7 +207,7 @@ def page_html(slug, meta, hero, main, sprite, ver):
 {topic_cards}
       </div>
     </section>
-    <p class="sp-updated">최종 수정 {TODAY}</p>
+    <p class="sp-updated">최종 수정 {updated}</p>
   </div>
 </main>
 
@@ -237,6 +247,37 @@ function closeMenu(){{document.getElementById('mobileMenu').classList.remove('op
 const nav=document.getElementById('topnav');
 window.addEventListener('scroll',()=>{{nav.style.boxShadow=window.scrollY>60?'0 4px 32px rgba(0,0,0,0.12)':'none';}},{{passive:true}});
 </script>
+
+<!-- 네이버 광고 전환추적 (wcs.trans) · 공통키 s_859375249a1 · 광고계정 1732929 와 혼용 금지 -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+(function(){{
+  if (!window.wcs) return;
+  if (location.hostname !== "paulah.co.kr") return;  /* 미리보기·테스트 주소에서는 수집 안 함 */
+  if (!window.wcs_add) window.wcs_add = {{}};
+  window.wcs_add["wa"] = "s_859375249a1";
+  wcs.inflow("paulah.co.kr");
+  wcs_do();                                   /* 페이지뷰: 로드당 1회 */
+  var MAP = [
+    {{sel:'a[href^="tel:"]',         type:"custom001"}},  /* 전화 버튼 클릭 */
+    {{sel:'a[href*="pf.kakao.com"]', type:"custom002"}},  /* 카카오 상담 이동 */
+    {{sel:'a[href*="naver.me"]',     type:"custom003"}}   /* 네이버 예약 이동 */
+  ];
+  var last = {{}};
+  document.addEventListener("click", function(e){{
+    var a = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    for (var i = 0; i < MAP.length; i++){{
+      if (!a.matches(MAP[i].sel)) continue;
+      var t = MAP[i].type, now = Date.now();
+      if (last[t] && now - last[t] < 1000) return;   /* 연타 중복 방지 */
+      last[t] = now;
+      try {{ var _conv = {{}}; _conv.type = t; wcs.trans(_conv); }} catch(err){{}}
+      return;                                        /* 한 클릭 = 한 이벤트 */
+    }}
+  }}, true);
+}})();
+</script>
 </body></html>
 '''
 
@@ -258,7 +299,7 @@ def main():
         slug = f.stem
         out = SITE / slug / 'index.html'
         out.parent.mkdir(exist_ok=True)
-        out.write_text(page_html(slug, meta, hero, main_html, sprite, ver), encoding='utf-8')
+        out.write_text(page_html(slug, meta, hero, main_html, sprite, ver, page_date(f)), encoding='utf-8')
         built.append((slug, len(faq_items(main_html)), len(meta['title']), len(meta['description'])))
     for slug, nfaq, lt, ld in built:
         print(f'{slug:10s}  FAQ {nfaq}개  제목 {lt}자  설명 {ld}자')
