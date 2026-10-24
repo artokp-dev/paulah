@@ -23,6 +23,7 @@ tools/               (비공개)
 site/                ← 공개되는 사이트
   index.html         메인 원페이지, 약 100KB (CSS는 <style> 인라인)
   checkup/ heart/ dental/ emergency/   진료 안내 페이지 (build.py 결과물)
+  privacy/           개인정보처리방침 (build.py 결과물, 모든 페이지 하단에 링크)
   assets/base.css    index.html <style> 자동 복사본 (직접 수정 금지)
   assets/page.css    진료 안내 페이지 전용 스타일
   llms.txt           AI 검색용 병원 요약
@@ -133,7 +134,7 @@ PIL의 ICO 저장은 `append_images`를 무시하므로 멀티사이즈 ICO는 �
 - 구글 서치콘솔 DNS TXT 인증 + 사이트맵 제출 ✅ (메타: `fb2IMgi83T_PYPyM84LkgRmpzPlgItX_kkPykhau4JI`)
 - title 30자 / description 67자 (네이버 권장 40/80자 이내)
 - 구조화 데이터: 메인 = VeterinaryCare + FAQPage + WebSite / 안내 페이지 = WebPage + BreadcrumbList + FAQPage
-- 메인에 남아 있는 영문 `SPECIALTY` 배지(진료과목·시설)와 '치과 Specialty'는 '전문'과 같은 뜻이라 광고 심의상 애매함 — 원장님 판단 대기
+- 영문 `SPECIALTY` 배지는 '전문'과 같은 뜻이라 2026-10-24 '중점진료'(김세림 라벨은 FOCUS)로 교체. 다시 쓰지 말 것
 - og:image = 병원 외관 사진 (로고는 잘리면 파란 사각형만 남아서 안 씀)
 
 진단은 반드시 **`https://paulah.co.kr`** (www 없이)로 할 것.
@@ -164,7 +165,7 @@ www는 apex로 301 리다이렉트되어 "robots.txt 없음" 같은 거짓 경�
 
 ## 검토 중
 
-- AI 검색 최적화 반영 완료 (2026-10-22). 원장님 확인(2026-10-24): 고양이 대기 공간 있음(좁아서 강조하지 말 것), 심장초음파 무마취 진행. 미답변: SPECIALTY 배지, 개인정보처리방침 추가 여부
+- AI 검색 최적화 반영 완료 (2026-10-22). 원장님 확인(2026-10-24): 고양이 대기 공간 있음(좁아서 강조하지 말 것), 심장초음파 무마취 진행. 개인정보처리방침 /privacy/ 추가(2026-10-24, tools/pages/privacy.html, META legal:true → 시행일 표시·다른 진료 안내·RSS 제외)
 - 홈페이지 수정은 이 저장소(GitHub)로만. 다른 도구(GPT 등)로 만든 파일을 Netlify에 직접 끌어 올리면 저장소 내용이 덮어써지니 주의
 - 네이버 검색결과 이미지 노출 대기 (1~2주)
 - 네이버 플레이스에 새 인테리어 사진·로고·김종완 수의사 반영 여부 점검

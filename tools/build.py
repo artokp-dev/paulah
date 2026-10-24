@@ -143,6 +143,20 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
         f'<b>{name}</b><span>{desc}</span></a>' for s, name, ic, desc in TOPICS)
     foot_topics = ' · '.join(f'<a href="../{s}/">{name}</a>' for s, name, _, _ in TOPICS)
     e = html.escape
+    legal = meta.get('legal', False)
+    if legal:
+        meta_line = f'시행일 <time datetime="{meta["effective"]}">{ko_date(meta["effective"])}</time>'
+        topics_section = ''
+    else:
+        meta_line = (f'작성 · 24시 폴 동물병원 수의사 &nbsp;|&nbsp; 최종 수정 '
+                     f'<time datetime="{updated}">{ko_date(updated)}</time>')
+        topics_section = f'''    <section class="sp-sec">
+      <h2 class="sp-h2">다른 진료 안내</h2>
+      <div class="sp-topics">
+{topic_cards}
+      </div>
+    </section>
+'''
 
     return f'''<!DOCTYPE html>
 <html lang="ko"><head>
@@ -202,7 +216,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
     <div class="sp-crumb"><a href="../">24시 폴 동물병원</a><span>›</span><span>{e(meta['crumb'])}</span></div>
     <p class="ey">{e(meta['eyebrow'])}</p>
     <h1 class="sp-h1">{meta['h1']}</h1>
-    <p class="sp-meta">작성 · 24시 폴 동물병원 수의사 &nbsp;|&nbsp; 최종 수정 <time datetime="{updated}">{ko_date(updated)}</time></p>
+    <p class="sp-meta">{meta_line}</p>
 {hero.strip()}
   </div>
 </header>
@@ -211,13 +225,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
   <div class="sp-wrap">
 {main.strip()}
 
-    <section class="sp-sec">
-      <h2 class="sp-h2">다른 진료 안내</h2>
-      <div class="sp-topics">
-{topic_cards}
-      </div>
-    </section>
-  </div>
+{topics_section}  </div>
 </main>
 
 <section class="sp-band">
@@ -242,6 +250,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
   365일 24시간 진료 · 24시간 수의사 상주<br>
   <div class="ftopics">진료 안내: {foot_topics}</div>
   인스타그램: <a href="https://www.instagram.com/24paulah" target="_blank" rel="noopener" style="color:var(--gold);">@24paulah</a> · 블로그: <a href="https://blog.naver.com/hwrat" target="_blank" rel="noopener">blog.naver.com/hwrat</a><br><br>
+  <a href="../privacy/" style="font-size:0.72rem;color:rgba(255,255,255,0.55);text-decoration:underline;">개인정보처리방침</a><br>
   <span style="font-size:0.69rem;color:rgba(255,255,255,0.16);">© 2026 Paul Animal Hospital. All rights reserved.</span>
 </footer>
 
@@ -326,6 +335,8 @@ def write_rss(index_html):
     items.append((t, f'{DOMAIN}/', d))
     for f in sorted(PAGES.glob('*.html')):
         meta = json.loads(re.search(r'<!--META(.*?)META-->', f.read_text(encoding='utf-8'), re.S).group(1))
+        if meta.get('legal'):
+            continue
         items.append((meta['title'], f'{DOMAIN}/{f.stem}/', meta['description']))
     e = html.escape
     body = '\n'.join(f"""    <item>
