@@ -1,10 +1,44 @@
+# 24시 폴 동물병원 — 모든 검색엔진·AI 검색 크롤러 허용
 User-agent: *
 Allow: /
 
+# 네이버 · 다음
 User-agent: Yeti
 Allow: /
 
+User-agent: Daum
+Allow: /
+
+# 구글 · 빙
 User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI 검색 (ChatGPT · Claude · Perplexity · Gemini)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://paulah.co.kr/sitemap.xml
