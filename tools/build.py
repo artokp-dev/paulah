@@ -234,7 +234,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
   <div class="sp-cta">
     <a href="tel:031-717-7558" class="bpg"><svg class="ic"><use href="#i-phone"></use></svg> 031-717-7558</a>
     <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" rel="noopener" class="bkk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
-    <a href="https://naver.me/xKyevLBK" target="_blank" rel="noopener" class="bnv"><b>N</b> 네이버 예약</a>
+    <a href="https://naver.me/xKyevLBK" target="_blank" rel="noopener" class="bnv"><b>N</b> {e(meta.get("naver_label", "네이버 예약"))}</a>
   </div>
 </section>
 
