@@ -35,6 +35,8 @@ with sync_playwright() as p:
             pg.on('response', lambda r: bad.append(f'{r.status} {r.url}') if r.status >= 400 and r.url.startswith(BASE) else None)
             pg.goto(BASE + path, wait_until='networkidle')
             pg.add_style_tag(content=REVEAL)
+            # 접힌 <details>·숨은 달(진료일정)의 lazy 이미지도 실제로 불러와 확인
+            pg.evaluate('document.querySelectorAll("details").forEach(d=>d.open=true);document.querySelectorAll("img[loading=lazy]").forEach(i=>i.loading="eager")')
             pg.evaluate('''async()=>{for(let y=0;y<document.body.scrollHeight;y+=600){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,60));}}''')
             pg.wait_for_timeout(500)
             pg.evaluate('window.scrollTo(0, 0)')

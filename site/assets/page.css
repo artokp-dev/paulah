@@ -143,3 +143,130 @@ body{background:#f7f7f4;}
   .sp-call-d{margin-left:0;}
   .sp-main{padding-top:44px;}
 }
+
+/* ══════════════════════════════════════════════════
+   의료진 진료일정 (/schedule/) — 2026-10-24
+   표·달력 HTML은 tools/schedule_page.py 가 만듭니다.
+══════════════════════════════════════════════════ */
+.sp-hero-s{padding-bottom:40px;}
+.sp-hero-s .sp-lead{font-size:0.95rem;}
+.sc [hidden]{display:none!important;}
+.sc:not(.js) .sc-bar{display:none;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+/* 상태 칩: 오전 · 오후 · 휴무(회색) */
+.sc-c{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:4px 10px;border-radius:20px;font-size:0.8rem;font-weight:700;line-height:1.3;letter-spacing:0.02em;white-space:nowrap;}
+.sc-c.am{background:#fff;color:var(--navy);border:1.5px solid rgba(30,58,122,0.38);}
+.sc-c.pm{background:#fbf3e2;color:#6e4f10;border:1.5px solid rgba(200,169,110,0.75);}
+.sc-c.off{background:#6f717d;color:#fff;border:1.5px solid #6f717d;}
+
+/* 오늘 */
+.sc-today{background:linear-gradient(135deg,#0f2045 0%,#1e3a7a 100%);border-radius:20px;padding:20px 22px;color:#fff;margin-bottom:22px;box-shadow:0 10px 30px rgba(20,42,100,0.18);}
+.sc-today .sc-tt{font-size:0.95rem;font-weight:700;color:#fff;line-height:1.5;margin:0 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sc-today .sc-tt span{font-size:0.66rem;letter-spacing:0.2em;color:var(--navy-dark);background:var(--gold);padding:3px 9px;border-radius:12px;}
+.sc-today ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.sc-today li{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.sc-today li.off{background:rgba(255,255,255,0.03);}
+.sc-today li.off .n{color:rgba(255,255,255,0.6);}
+.sc-today .n{font-weight:700;font-size:0.92rem;}
+.sc-today .n small{display:block;font-weight:500;font-size:0.72rem;color:var(--gold-l);margin-top:1px;}
+.sc-today .sc-c.off{background:#8a8c97;border-color:#8a8c97;}
+
+.sc-empty{background:#fff;border:1.5px dashed rgba(26,58,107,0.25);border-radius:18px;padding:20px 22px;margin-bottom:20px;}
+.sc-empty p{margin:0!important;}
+.sc-empty p + p{margin-top:6px!important;font-size:0.86rem!important;}
+
+/* 월 · 수의사 선택 */
+.sc-bar{padding:4px 0 12px;margin:0 0 6px;border-bottom:1px solid rgba(26,58,107,0.08);}
+.sc-tabs{display:flex;gap:8px;margin-bottom:10px;}
+.sc-tab{flex:0 1 160px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:9px 14px;border-radius:14px;border:1.5px solid rgba(26,58,107,0.16);background:#fff;color:var(--navy-dark);font-family:inherit;cursor:pointer;}
+.sc-tab b{font-size:1.05rem;font-weight:700;}
+.sc-tab span{font-size:0.7rem;color:var(--tl);}
+.sc-tab.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.sc-tab.on span{color:var(--gold-l);}
+.sc-vbs{display:flex;flex-wrap:wrap;gap:6px;}
+.sc-vb{flex:0 0 auto;padding:8px 14px;border-radius:22px;border:1.5px solid rgba(26,58,107,0.16);background:#fff;color:var(--navy-dark);font-family:inherit;font-size:0.84rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+.sc-vb small{font-size:0.7rem;font-weight:500;color:#85651f;margin-left:4px;}
+.sc-vb.on{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);}
+.sc-vb.on small{color:var(--navy-dark);}
+.sc-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:0.8rem;color:var(--tm);margin:12px 0 4px;}
+.sc-legend .sc-c{min-width:0;padding:2px 9px;font-size:0.72rem;}
+.sc-legend > span + span{margin-left:8px;}
+.sc-legend .sc-c{margin-right:4px;}
+
+.sc-month{margin-top:14px;}
+.sc-mt{font-family:"Noto Serif KR",serif;font-size:1.2rem;color:var(--navy-dark);font-weight:700;margin:6px 0 12px;}
+.sc .sc-notice{background:#fffaf0;border:1px solid rgba(200,169,110,0.45);border-left:4px solid var(--gold);border-radius:12px;padding:11px 14px;font-size:0.86rem!important;line-height:1.7!important;color:#5a4518!important;}
+
+/* 전체: 날짜 × 수의사 표 */
+.sc-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:16px;table-layout:fixed;}
+.sc-table thead th{position:sticky;top:70px;z-index:2;box-shadow:0 1px 0 rgba(26,58,107,0.1);}
+.sc-table thead th:first-child{border-top-left-radius:14px;}
+.sc-table thead th:last-child{border-top-right-radius:14px;}
+.sc-table thead th{background:#eef3fc;color:var(--navy-dark);font-size:0.84rem;font-weight:700;padding:10px 4px;text-align:center;line-height:1.3;}
+.sc-table thead th:first-child{width:62px;}
+.sc-table thead small{display:block;font-size:0.68rem;font-weight:500;color:#85651f;margin-top:1px;}
+.sc-table tbody th,.sc-table td{border-top:1px solid rgba(26,58,107,0.07);padding:7px 4px;text-align:center;}
+.sc-table tbody th{font-weight:400;white-space:nowrap;}
+.sc-table tbody th b{font-size:0.95rem;color:var(--td);margin-right:3px;}
+.sc-table tbody th span{font-size:0.74rem;color:var(--tl);}
+.sc-table tr.sun th b,.sc-table tr.sun th span{color:#c0392b;}
+.sc-table tr.sat th b,.sc-table tr.sat th span{color:#1e3a7a;}
+.sc-table tr.past th,.sc-table tr.past td{opacity:0.45;}
+.sc-table tr.today th,.sc-table tr.today td{background:#fff6e3;}
+.sc-table tr.today th{box-shadow:inset 4px 0 0 var(--gold);}
+.sc-table tbody tr.today th{position:relative;}
+.sc-table tbody tr.today th::before{content:"오늘";position:absolute;top:2px;left:4px;right:0;font-size:0.58rem;font-weight:700;color:#85651f;line-height:1;}
+.sc-legend span{white-space:nowrap;}
+
+/* 수의사별 달력 */
+.sc-vt{font-family:"Noto Serif KR",serif;font-size:1.05rem!important;font-weight:700;color:var(--navy-dark)!important;margin:0 0 10px!important;}
+.sc-vt small{font-family:"Noto Sans KR",sans-serif;font-size:0.78rem;color:#85651f;font-weight:700;}
+.sc-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.sc-cal .h{text-align:center;font-size:0.78rem;font-weight:700;color:var(--tm);padding:4px 0;}
+.sc-cal .h.sun{color:#c0392b;} .sc-cal .h.sat{color:#1e3a7a;}
+.sc-cal .c{min-height:74px;background:#fff;border:1.5px solid rgba(26,58,107,0.12);border-radius:12px;padding:6px 5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:4px;}
+.sc-cal .c b{align-self:flex-end;font-size:0.8rem;font-weight:700;color:var(--td);line-height:1;}
+.sc-cal .c.sun b{color:#c0392b;} .sc-cal .c.sat b{color:#1e3a7a;}
+.sc-cal .c.pm{background:#fffbf3;border-color:rgba(200,169,110,0.55);}
+.sc-cal .c.off{background:#e4e5ea;border-color:#e4e5ea;}
+.sc-cal .c.off b{color:#7b7d88;}
+.sc-cal .c .sc-c{min-width:0;width:100%;max-width:52px;padding:3px 0;font-size:0.74rem;}
+.sc-cal .c.past{opacity:0.45;}
+.sc-cal .c.today{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold);}
+
+/* 일정표 이미지 */
+.sc-imgs{margin-top:18px;background:#fff;border:1.5px solid rgba(26,58,107,0.1);border-radius:16px;padding:0 16px;}
+.sc-imgs summary{cursor:pointer;list-style:none;padding:15px 2px;font-weight:700;color:var(--navy-dark);font-size:0.92rem;display:flex;align-items:center;gap:8px;}
+.sc-imgs summary::-webkit-details-marker{display:none;}
+.sc-imgs summary::after{content:"+";margin-left:auto;font-size:1.2rem;color:#85651f;}
+.sc-imgs[open] summary::after{content:"–";}
+.sc-imgs summary small{font-weight:500;font-size:0.74rem;color:var(--tl);}
+.sc-gal{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-bottom:16px;}
+.sc-img{display:block;text-decoration:none;}
+.sc-img img{width:100%;height:auto;border-radius:10px;border:1px solid rgba(26,58,107,0.12);display:block;}
+.sc-img span{display:block;text-align:center;font-size:0.74rem;color:var(--tm);margin-top:6px;}
+
+.sc .sc-next{margin:16px 0 0!important;font-size:0.86rem!important;color:var(--tm)!important;background:#fff;border:1.5px dashed rgba(26,58,107,0.22);border-radius:14px;padding:12px 16px;}
+.sc .sc-pastw{margin:12px 0 0!important;text-align:right;}
+.sc-past{background:none;border:none;font-family:inherit;font-size:0.8rem;color:var(--tl);text-decoration:underline;cursor:pointer;padding:4px;}
+
+@media(max-width:760px){
+  .sp-hero-s{padding:96px 5% 30px;}
+  .sp-hero-s .sp-h1{margin-bottom:12px;}
+  .sc-today{padding:16px 14px;}
+  .sc-today ul{grid-template-columns:1fr 1fr;}
+  .sc-today li{padding:9px 10px;}
+  .sc-today .sc-c{min-width:44px;font-size:0.74rem;padding:3px 8px;}
+  .sc-table thead th{font-size:0.8rem;padding:9px 2px;}
+  .sc-table thead th:first-child{width:52px;}
+  .sc-table tbody th,.sc-table td{padding:6px 2px;}
+  .sc-table .sc-c{min-width:0;width:100%;max-width:56px;padding:4px 0;font-size:0.76rem;}
+  .sc-cal{gap:4px;}
+  .sc-cal .c{min-height:62px;border-radius:10px;padding:5px 3px 6px;}
+  .sc-cal .c .sc-c{font-size:0.7rem;}
+  .sc-gal{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:360px){
+  .sc-today ul{grid-template-columns:1fr;}
+}
