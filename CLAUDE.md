@@ -20,10 +20,16 @@ tools/               (비공개)
   build.py           진료 안내 페이지 생성기
   pages/*.html       진료 안내 페이지 원고 ← 문구는 여기서 고친다
   check.py           렌더 검증 (JS 에러·깨진 이미지·죽은 링크·가로 스크롤)
+  schedule_page.py   의료진 진료일정 표·달력·이미지 생성 (build.py가 불러 씀)
+  schedule/YYYY-MM.csv   월별 진료일정 자료 ← 매달 여기만 바꾼다
+  schedule/from_sheet.py 직원 스케쥴 시트(xlsx) → CSV 변환
+  schedule/images/YYYY-MM/1~4.png  (선택) 직접 만든 일정 이미지
 site/                ← 공개되는 사이트
   index.html         메인 원페이지, 약 100KB (CSS는 <style> 인라인)
   checkup/ heart/ dental/ emergency/   진료 안내 페이지 (build.py 결과물)
   privacy/           개인정보처리방침 (build.py 결과물, 모든 페이지 하단에 링크)
+  schedule/          의료진 진료일정 (build.py 결과물, 카카오 채널 고정 링크)
+  schedule/img/      월별 일정 이미지 YYYY-MM-1~4.webp (자동 생성 또는 직접 넣은 이미지)
   assets/base.css    index.html <style> 자동 복사본 (직접 수정 금지)
   assets/page.css    진료 안내 페이지 전용 스타일
   llms.txt           AI 검색용 병원 요약
@@ -57,6 +63,25 @@ site/                ← 공개되는 사이트
 4. FAQ 구조화 데이터는 화면의 `<details class="faq-item">`에서 자동 생성된다.
    index.html의 FAQ를 고치면 FAQPage JSON-LD도 같이 고친다.
 5. 새 페이지를 추가하면 build.py의 TOPICS, sitemap.xml, llms.txt, index.html 푸터에도 넣는다.
+
+## 의료진 진료일정 (/schedule/, 2026-10-24)
+
+카카오 채널에서 매달 같은 주소로 연결: **https://paulah.co.kr/schedule/**
+
+- 방문자의 한국 날짜 기준으로 **이번 달이 기본**, 다음 달은 탭으로 선택. 지난달은 자동으로 숨김(아래 '지난 일정 보기'로만 열림).
+- 다음 달 CSV가 없으면 "N월 진료일정은 확정되는 대로 올라옵니다"만 표시. **빈 달·빈 날을 임의로 채우지 않는다** (빠진 날이 있으면 빌드가 멈춤).
+- 표시 순서·직함: 김평 원장 / 김율현 원장 / 김세림 내과 과장 / 김종완 수의사 (원장님 지정, 이미지 번호 1~4와 같은 순서)
+- 표기: 오전(흰색) · 오후(금색) · **휴무(회색)**. 시트 규칙 = 9·10시 출근 → 오전, 11·12시·당직 출근 → 오후, 시간 없는 칸(휴무·연차·당직 다음날·예비군) → 휴무.
+  2026년 1월·11월 병원 일정 이미지와 대조해 같은 규칙임을 확인함.
+- 테크니션·야간당직 칸은 공개하지 않는다.
+- 미리보기 확인용: `?today=2026-11-01` 을 붙이면 그 날짜 기준 화면, `?m=2026-11&v=kim-serim` 으로 달·수의사 지정.
+
+매달 갱신 순서:
+1. 원장님 승인 일정 → `tools/schedule/YYYY-MM.csv` (시트에서 만들 때 `python3 tools/schedule/from_sheet.py 받은파일.xlsx 2026 12`,
+   '확인 필요' 경고가 나오면 그 칸을 직접 고친다). 형식: `날짜,김평,김율현,김세림,김종완` / `1,오전,오후,휴무,오전`. `안내: 문구` 줄은 그 달 위에 안내로 표시.
+2. (선택) 캔바 등으로 만든 이미지 4장을 `tools/schedule/images/YYYY-MM/1.png ~ 4.png` 에 넣으면 그것을 쓰고, 없으면 CSV로 자동 생성한다.
+3. `python3 tools/build.py` → `python3 tools/check.py /tmp/out / /schedule/` → PR 미리보기 확인 → 승인 후 merge.
+지난달 CSV·이미지는 지우지 않는다 (자료 보관).
 
 블로그 글을 홈페이지에 그대로 복사하지 않는다 (네이버 유사문서 판정 위험). 요약 + 블로그 링크 방식.
 사이트·블로그에 없는 사실(비용, 소요 시간 등)은 원장님 확인 전까지 쓰지 않는다.

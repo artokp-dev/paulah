@@ -170,6 +170,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .doc-in{max-width:1100px;margin:0 auto;}
 .doc-hd{text-align:center;margin-bottom:60px;}
 .doc-hd .sl{margin:0 auto;text-align:center;max-width:480px;}
+.doc-sched{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 22px;border-radius:30px;background:#fff;border:1.5px solid rgba(200,169,110,0.7);color:var(--navy-dark);font-size:0.88rem;font-weight:700;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;}
+.doc-sched .ic{color:#85651f;}
+.doc-sched span{color:#85651f;}
+.doc-sched:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(20,42,100,0.1);}
 
 .doc-card{
   background:white;border-radius:24px;overflow:hidden;
@@ -1395,6 +1399,7 @@ body{animation:none!important;background:var(--cream)!important;}
       <p class="ey">OUR VETERINARIANS</p>
       <h2 class="sh2">의료진 소개</h2>
       <p class="sl">경험과 전문성을 갖춘 수의사가 반려동물의 건강을 책임집니다.</p>
+      <a href="schedule/" class="doc-sched"><svg class="ic"><use href="#i-calendar"></use></svg> 이번 달 의료진 진료일정 보기 <span>→</span></a>
     </div>
 
     <!-- 김율현 원장 -->
@@ -1821,7 +1826,7 @@ body{animation:none!important;background:var(--cream)!important;}
   <strong>24시 폴 동물병원 (Paul Animal Hospital)</strong><br>
   경기도 성남시 분당구 성남대로 385 분당클리닉빌딩 1층 102호 · TEL: <a href="tel:031-717-7558" style="color:inherit;font-weight:700;text-decoration:none;">031-717-7558</a><br>
   365일 24시간 진료 · 24시간 수의사 상주<br>
-  <div class="ftopics">진료 안내: <a href="checkup/">건강검진</a> · <a href="heart/">심장 · 노령동물 내과</a> · <a href="dental/">치과 · 스케일링</a> · <a href="emergency/">24시 응급 · 오시는 길</a></div>
+  <div class="ftopics">진료 안내: <a href="checkup/">건강검진</a> · <a href="heart/">심장 · 노령동물 내과</a> · <a href="dental/">치과 · 스케일링</a> · <a href="emergency/">24시 응급 · 오시는 길</a> · <a href="schedule/">의료진 진료일정</a></div>
   인스타그램: <a href="https://www.instagram.com/24paulah" target="_blank" style="color:var(--gold);">@24paulah</a> · 블로그: <a href="https://blog.naver.com/hwrat" target="_blank">blog.naver.com/hwrat</a><br><br>
   <a href="privacy/" style="font-size:0.72rem;color:rgba(255,255,255,0.55);text-decoration:underline;">개인정보처리방침</a><br>
   <span style="font-size:0.69rem;color:rgba(255,255,255,0.16);">© 2026 Paul Animal Hospital. All rights reserved.</span>

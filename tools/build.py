@@ -116,7 +116,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
             'isPartOf': {'@type': 'WebSite', '@id': f'{DOMAIN}/#website', 'name': '24시 폴 동물병원', 'url': f'{DOMAIN}/'},
             'about': {'@id': f'{DOMAIN}/#clinic'},
             'primaryImageOfPage': {'@type': 'ImageObject', 'url': f'{DOMAIN}/og-image.jpg?v=2'},
-            'datePublished': PUBLISHED,
+            'datePublished': meta.get('published', PUBLISHED),
             'dateModified': updated,
             'author': {'@id': f'{DOMAIN}/#clinic'},
             'publisher': {'@id': f'{DOMAIN}/#clinic'},
@@ -141,10 +141,15 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
     topic_cards = '\n'.join(
         f'      <a href="../{s}/" class="sp-topic{" on" if s == slug else ""}"><svg class="ic"><use href="#{ic}"></use></svg>'
         f'<b>{name}</b><span>{desc}</span></a>' for s, name, ic, desc in TOPICS)
-    foot_topics = ' · '.join(f'<a href="../{s}/">{name}</a>' for s, name, _, _ in TOPICS)
+    foot_topics = (' · '.join(f'<a href="../{s}/">{name}</a>' for s, name, _, _ in TOPICS)
+                   + ' · <a href="../schedule/">의료진 진료일정</a>')
     e = html.escape
     legal = meta.get('legal', False)
-    if legal:
+    if meta.get('kind') == 'schedule':
+        meta_line = (f'일정 갱신 <time datetime="{updated}">{ko_date(updated)}</time> &nbsp;|&nbsp; '
+                     f'매달 확정된 일정으로 바뀝니다')
+        topics_section = ''
+    elif legal:
         meta_line = f'시행일 <time datetime="{meta["effective"]}">{ko_date(meta["effective"])}</time>'
         topics_section = ''
     else:
@@ -211,7 +216,7 @@ def page_html(slug, meta, hero, main, sprite, ver, updated):
   </ul>
 </div>
 
-<header class="sp-hero">
+<header class="sp-hero{(' ' + meta['hero_class']) if meta.get('hero_class') else ''}">
   <div class="sp-wrap">
     <div class="sp-crumb"><a href="../">24시 폴 동물병원</a><span>›</span><span>{e(meta['crumb'])}</span></div>
     <p class="ey">{e(meta['eyebrow'])}</p>
@@ -315,9 +320,15 @@ def main():
         hero = src.split('<!--HERO-->', 1)[1].split('<!--MAIN-->', 1)[0]
         main_html = src.split('<!--MAIN-->', 1)[1]
         slug = f.stem
+        updated = page_date(f)
+        if meta.get('kind') == 'schedule':       # 의료진 진료일정: tools/schedule/*.csv 로 표·달력·이미지 생성
+            import schedule_page
+            block, sched_date = schedule_page.build()
+            main_html = main_html.replace('<!--SCHEDULE-->', block)
+            updated = max(updated, sched_date)
         out = SITE / slug / 'index.html'
         out.parent.mkdir(exist_ok=True)
-        out.write_text(page_html(slug, meta, hero, main_html, sprite, ver, page_date(f)), encoding='utf-8')
+        out.write_text(page_html(slug, meta, hero, main_html, sprite, ver, updated), encoding='utf-8')
         built.append((slug, len(faq_items(main_html)), len(meta['title']), len(meta['description'])))
     write_rss(index_html)
     for slug, nfaq, lt, ld in built:
@@ -335,7 +346,7 @@ def write_rss(index_html):
     items.append((t, f'{DOMAIN}/', d))
     for f in sorted(PAGES.glob('*.html')):
         meta = json.loads(re.search(r'<!--META(.*?)META-->', f.read_text(encoding='utf-8'), re.S).group(1))
-        if meta.get('legal'):
+        if meta.get('legal') or meta.get('kind') == 'schedule':
             continue
         items.append((meta['title'], f'{DOMAIN}/{f.stem}/', meta['description']))
     e = html.escape

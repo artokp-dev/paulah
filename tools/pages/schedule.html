@@ -1,0 +1,133 @@
+<!--META
+{
+  "title": "의료진 진료일정 | 24시 폴 동물병원",
+  "description": "분당 정자동 24시 폴 동물병원 월별 의료진 진료일정. 김평·김율현 원장, 김세림 내과 과장, 김종완 수의사의 오전·오후·휴무 일정입니다.",
+  "crumb": "의료진 진료일정",
+  "eyebrow": "SCHEDULE",
+  "h1": "의료진 진료일정",
+  "kind": "schedule",
+  "hero_class": "sp-hero-s",
+  "published": "2026-10-24"
+}
+META-->
+<!--HERO-->
+    <p class="sp-lead">폴 동물병원은 365일 24시간 수의사가 상주해 언제든 진료합니다. 원하는 수의사에게 진료받고 싶으실 때 아래 월별 일정을 확인해 주세요.</p>
+<!--MAIN-->
+<!--SCHEDULE-->
+
+    <section class="sp-sec">
+      <h2 class="sp-h2">일정 보는 법</h2>
+      <ul class="sp-list">
+        <li><strong>오전</strong>은 오전부터, <strong>오후</strong>는 오후부터 진료하는 날입니다. <strong>휴무</strong>는 회색으로 표시했습니다.</li>
+        <li>위에서 수의사를 고르면 그 수의사의 한 달 일정을 달력으로 볼 수 있습니다.</li>
+        <li>일정은 병원 사정에 따라 바뀔 수 있습니다. 특정 수의사 진료를 원하시면 내원 전 <a href="tel:031-717-7558">031-717-7558</a>로 확인해 주세요.</li>
+        <li>표시된 일정과 관계없이 밤과 새벽, 주말·공휴일에도 24시간 수의사가 상주합니다.</li>
+      </ul>
+      <p class="sp-note">일반 진료는 전화·카카오톡 채널·네이버 예약으로, 건강검진은 전화로 예약하실 수 있습니다. 의료진 소개는 <a href="../#doctors">홈페이지 의료진 소개</a>에서 보실 수 있습니다.</p>
+    </section>
+
+<script>
+(function(){
+  var root = document.getElementById('schedule');
+  if (!root) return;
+  var DATA = JSON.parse(document.getElementById('scData').textContent);
+  var q = new URLSearchParams(location.search);
+  function kstToday(){
+    var t = q.get('today');                       /* 미리보기 확인용: ?today=2026-11-01 */
+    if (t && /^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
+    try {
+      return new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
+    } catch (err) {
+      return new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    }
+  }
+  function addM(k, n){
+    var y = +k.slice(0, 4), m = +k.slice(5, 7) - 1 + n;
+    y += Math.floor(m / 12); m = ((m % 12) + 12) % 12;
+    return y + '-' + (m < 9 ? '0' : '') + (m + 1);
+  }
+  var today = kstToday(), cur = today.slice(0, 7), next = addM(cur, 1);
+  var tabs = [].slice.call(root.querySelectorAll('.sc-tab'));
+  var months = [].slice.call(root.querySelectorAll('.sc-month'));
+  var vbs = [].slice.call(root.querySelectorAll('.sc-vb'));
+  var keys = months.map(function(x){ return x.getAttribute('data-m'); });
+  var has = function(k){ return keys.indexOf(k) >= 0; };
+  var qm = q.get('m');
+  var sel = qm && has(qm) ? qm : has(cur) ? cur : has(next) ? next : null;
+  var showPast = !!(sel && sel < cur);
+  var vet = q.get('v') || 'all';
+  if (!vbs.some(function(b){ return b.getAttribute('data-v') === vet; })) vet = 'all';
+  var mlabel = function(k){ return +k.slice(5, 7) + '월'; };
+
+  /* 지난 날짜 흐리게 · 오늘 표시 */
+  [].forEach.call(root.querySelectorAll('[data-d]'), function(el){
+    var d = el.getAttribute('data-d');
+    if (d < today) el.classList.add('past');
+    else if (d === today) el.classList.add('today');
+  });
+
+  /* 오늘 진료 수의사 */
+  var rows = DATA.months[cur];
+  if (rows) {
+    var di = +today.slice(8, 10), r = rows[di - 1];
+    if (r) {
+      var wd = '일월화수목금토'.charAt(new Date(Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1, di)).getUTCDay());
+      var cls = {'오전':'am','오후':'pm','휴무':'off'};
+      var li = DATA.vets.map(function(v, i){
+        return '<li class="' + cls[r[i]] + '"><span class="n">' + v[0] + ' <small>' + v[1] + '</small></span><span class="sc-c ' + cls[r[i]] + '">' + r[i] + '</span></li>';
+      }).join('');
+      var box = document.getElementById('scToday');
+      box.innerHTML = '<p class="sc-tt"><span>TODAY</span> 오늘 ' + (+today.slice(5, 7)) + '월 ' + di + '일 (' + wd + ') 진료 수의사</p><ul>' + li + '</ul>';
+      box.hidden = false;
+    }
+  }
+
+  if (!has(cur)) {
+    document.getElementById('scEmptyM').textContent = mlabel(cur);
+    document.getElementById('scEmpty').hidden = false;
+  } else if (!has(next)) {
+    var nx = document.getElementById('scNext');
+    nx.textContent = mlabel(next) + ' 진료일정은 확정되는 대로 이곳에 올라옵니다.';
+    nx.hidden = false;
+  }
+  var pastBtn = document.getElementById('scPast');
+  if (keys.some(function(k){ return k < cur; }) && !showPast) pastBtn.hidden = false;
+  pastBtn.addEventListener('click', function(){ showPast = true; pastBtn.hidden = true; apply(); });
+
+  function label(k){ return k === cur ? '이번 달' : k === next ? '다음 달' : k < cur ? '지난 일정' : ''; }
+  function apply(){
+    var anyTab = false;
+    tabs.forEach(function(t){
+      var k = t.getAttribute('data-m');
+      var vis = k === cur || k === next || k === sel || (showPast && k < cur);
+      t.hidden = !vis; anyTab = anyTab || vis;
+      t.classList.toggle('on', k === sel);
+      t.setAttribute('aria-pressed', k === sel ? 'true' : 'false');
+      t.querySelector('span').textContent = label(k);
+    });
+    root.querySelector('.sc-bar').hidden = !anyTab;
+    root.querySelector('.sc-legend').hidden = !anyTab;
+    months.forEach(function(mn){
+      mn.hidden = mn.getAttribute('data-m') !== sel;
+      mn.querySelector('.sc-all').hidden = vet !== 'all';
+      [].forEach.call(mn.querySelectorAll('.sc-vet'), function(v){ v.hidden = v.getAttribute('data-v') !== vet; });
+    });
+    vbs.forEach(function(b){
+      var on = b.getAttribute('data-v') === vet;
+      b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  function keepUrl(){
+    try {
+      var u = new URL(location.href);
+      if (sel && sel !== cur) u.searchParams.set('m', sel); else u.searchParams.delete('m');
+      if (vet !== 'all') u.searchParams.set('v', vet); else u.searchParams.delete('v');
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    } catch (err) {}
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ sel = t.getAttribute('data-m'); apply(); keepUrl(); }); });
+  vbs.forEach(function(b){ b.addEventListener('click', function(){ vet = b.getAttribute('data-v'); apply(); keepUrl(); }); });
+  root.classList.add('js');
+  apply();
+})();
+</script>
