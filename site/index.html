@@ -170,6 +170,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .doc-in{max-width:1100px;margin:0 auto;}
 .doc-hd{text-align:center;margin-bottom:60px;}
 .doc-hd .sl{margin:0 auto;text-align:center;max-width:480px;}
+.doc-sched{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 22px;border-radius:30px;background:#fff;border:1.5px solid rgba(200,169,110,0.7);color:var(--navy-dark);font-size:0.88rem;font-weight:700;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;}
+.doc-sched .ic{color:#85651f;}
+.doc-sched small{font-size:0.72rem;font-weight:500;color:#85651f;}
+.doc-sched:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(20,42,100,0.1);}
 
 .doc-card{
   background:white;border-radius:24px;overflow:hidden;
@@ -1395,6 +1399,7 @@ body{animation:none!important;background:var(--cream)!important;}
       <p class="ey">OUR VETERINARIANS</p>
       <h2 class="sh2">의료진 소개</h2>
       <p class="sl">경험과 전문성을 갖춘 수의사가 반려동물의 건강을 책임집니다.</p>
+      <a href="https://pf.kakao.com/_xfkxekM/posts" target="_blank" rel="noopener" class="doc-sched" data-wcs-skip><svg class="ic"><use href="#i-calendar"></use></svg> 이번 달 의료진 진료일정 보기 <small>카카오 채널</small></a>
     </div>
 
     <!-- 김율현 원장 -->
@@ -1875,7 +1880,7 @@ window.addEventListener('scroll',()=>{if(heroBg)heroBg.style.transform=`scale(1.
   var last = {};
   document.addEventListener("click", function(e){
     var a = e.target && e.target.closest ? e.target.closest("a") : null;
-    if (!a) return;
+    if (!a || a.hasAttribute("data-wcs-skip")) return;   /* 진료일정 안내 링크 등은 전환 아님 */
     for (var i = 0; i < MAP.length; i++){
       if (!a.matches(MAP[i].sel)) continue;
       var t = MAP[i].type, now = Date.now();

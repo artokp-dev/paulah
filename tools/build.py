@@ -284,7 +284,7 @@ window.addEventListener('scroll',()=>{{nav.style.boxShadow=window.scrollY>60?'0 
   var last = {{}};
   document.addEventListener("click", function(e){{
     var a = e.target && e.target.closest ? e.target.closest("a") : null;
-    if (!a) return;
+    if (!a || a.hasAttribute("data-wcs-skip")) return;   /* 진료일정 안내 링크 등은 전환 아님 */
     for (var i = 0; i < MAP.length; i++){{
       if (!a.matches(MAP[i].sel)) continue;
       var t = MAP[i].type, now = Date.now();
