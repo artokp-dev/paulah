@@ -354,6 +354,9 @@ footer a{color:var(--gold);text-decoration:none;}
   body.has-fbar{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
 }
 @media(max-width:580px){
+  /* 첫 화면 제목: 휴대폰에서 '반려동물의 평생 건강,' / '폴이 끝까지 함께합니다' 두 줄로 딱 맞게 */
+  .ht{font-size:clamp(1.55rem,8vw,2.3rem);word-break:keep-all;}
+  .hsb,.hnote{word-break:keep-all;text-wrap:balance;}
   .hcta{flex-direction:column;align-items:center;gap:10px;}
   .hcta .bpg,.hcta .bkk,.hcta .bnvh{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:min(280px,100%);padding:14px 18px;box-sizing:border-box;}
 }
@@ -1342,7 +1345,7 @@ body{animation:none!important;background:var(--cream)!important;}
   <div class="hi">
     <div class="hbadge"><div class="hbd"></div>분당 정자동 · 24시간 365일<div class="hbd"></div></div>
     <h1 class="ht">반려동물의 평생 건강,<br><span class="g">폴이 끝까지 함께합니다</span></h1>
-    <p class="hsb">노령동물 중점진료 · 심장초음파 · 치과 · 건강검진 · 내시경</p>
+    <p class="hsb">노령동물 중점진료&nbsp;· 심장초음파&nbsp;· 치과&nbsp;· 건강검진&nbsp;· 내시경</p>
     <div class="hcta">
       <a href="tel:031-717-7558" class="bpg"><svg class="ic"><use href="#i-phone"></use></svg> 전화 예약</a>
       <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" class="bkk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
