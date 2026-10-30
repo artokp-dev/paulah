@@ -338,6 +338,25 @@ footer a{color:var(--gold);text-decoration:none;}
 .fb{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:30px;font-size:0.83rem;font-weight:700;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,0.22);transition:transform 0.2s,box-shadow 0.2s;}
 .fb:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
 .fk{background:#FEE500;color:#3a1d00;} .ft2{background:var(--navy);color:#fff;}
+/* 메인 하단 고정 버튼 3개 (전화·카카오·네이버 예약) — 2026-10-30 H30 */
+.fnv{background:#007f3e;color:#fff;} .fnv b{font-weight:900;}
+.fb .fbm{display:none;}
+.bnvh{display:inline-flex;align-items:center;gap:8px;background:#007f3e;color:#fff;padding:15px 34px;border-radius:32px;font-size:0.93rem;font-weight:700;text-decoration:none;box-shadow:0 4px 24px rgba(3,199,90,0.32);transition:transform 0.22s;}
+.bnvh:hover{transform:translateY(-3px);}
+.bnvh b{font-weight:900;}
+.hnote{margin:16px auto 0;max-width:560px;font-size:0.84rem;line-height:1.7;color:rgba(255,255,255,0.86);word-break:keep-all;text-shadow:0 1px 8px rgba(0,0,0,0.35);animation:fadeUp 1s 0.5s ease both;}
+@media(max-width:760px){
+  .floaters.fb3{left:0;right:0;bottom:0;flex-direction:row;align-items:stretch;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,0.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 -4px 20px rgba(15,32,69,0.12);}
+  .floaters.fb3 .fb{flex:1 1 0;min-width:0;justify-content:center;gap:6px;padding:12px 4px;border-radius:12px;font-size:0.82rem;white-space:nowrap;box-shadow:none;}
+  .floaters.fb3 .fb:hover{transform:none;}
+  .floaters.fb3 .ft2{order:1;} .floaters.fb3 .fk{order:2;} .floaters.fb3 .fnv{order:3;}
+  .floaters.fb3 .fbw{display:none;} .floaters.fb3 .fbm{display:inline;}
+  body.has-fbar{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
+}
+@media(max-width:580px){
+  .hcta{flex-direction:column;align-items:center;gap:10px;}
+  .hcta .bpg,.hcta .bkk,.hcta .bnvh{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:min(280px,100%);padding:14px 18px;box-sizing:border-box;}
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
@@ -1258,7 +1277,7 @@ body{animation:none!important;background:var(--cream)!important;}
 @media(max-width:420px){.nt{white-space:nowrap;padding:7px 13px;font-size:0.82rem;}.ne{display:none;}}
 </style>
 </head>
-<body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<body class="has-fbar"><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.4l1.2 4.1-2.3 1.4a12.4 12.4 0 0 0 7.5 7.5l1.4-2.3 4.1 1.2v3.4a1.7 1.7 0 0 1-1.9 1.7C10.4 20.3 3.7 13.6 3.5 5.4a1.7 1.7 0 0 1 1.7-1.9Z"></path></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.8a7.3 7.3 0 0 1-7.3 7.3H9l-4.5 3v-4.4a7.3 7.3 0 0 1-1-3.7v-1a7.3 7.3 0 0 1 7.3-7.3h2.4a7.3 7.3 0 0 1 7.3 7.3Z"></path></symbol>
 <symbol id="i-checkup" viewBox="0 0 24 24"><rect x="4.5" y="4" width="15" height="16.5" rx="2.2"></rect><path d="M9 4V3.2A1.2 1.2 0 0 1 10.2 2h3.6A1.2 1.2 0 0 1 15 3.2V4"></path><path d="M7.5 13.2h2.2l1.4-3.1 2.1 6.2 1.4-3.1h1.9"></path></symbol>
@@ -1327,7 +1346,9 @@ body{animation:none!important;background:var(--cream)!important;}
     <div class="hcta">
       <a href="tel:031-717-7558" class="bpg"><svg class="ic"><use href="#i-phone"></use></svg> 전화 예약</a>
       <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" class="bkk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
+      <a href="https://naver.me/xKyevLBK" target="_blank" rel="noopener" class="bnvh"><b>N</b> 일반 진료 네이버 예약</a>
     </div>
+    <p class="hnote">건강검진 예약은 전화로 도와드립니다. 응급·야간 내원 전에는 전화해 주세요.</p>
     <div class="hst">
       <div class="hss"><div class="hsn">10<em>년+</em></div><div class="hsl">운영 경력</div></div>
       <div class="hss"><div class="hsn">15만<em>+</em></div><div class="hsl">누적 진료</div></div>
@@ -1349,7 +1370,7 @@ body{animation:none!important;background:var(--cream)!important;}
     <div class="pi"><div class="pin">01</div><div class="pit">건강검진 · 예방의학</div><div class="pid">베이직·스페셜·프리미엄<br>3단계 맞춤 검진 프로그램<br>원장 직접 리포트 카카오 발송</div></div>
     <div class="pi"><div class="pin">02</div><div class="pit">365일 24시간</div><div class="pid">24시간 수의사 상주<br>밤·새벽·공휴일에도<br>언제든 진료 가능</div></div>
     <div class="pi"><div class="pin">03</div><div class="pit">심장·노령동물 내과</div><div class="pid">심장초음파 특화<br>만성질환 장기 관리<br>삶의 질을 함께 고민합니다</div></div>
-    <div class="pi"><div class="pin">04</div><div class="pit">치과 치료</div><div class="pid">4,000건+ 치과 경험<br>마취 안전성 최우선<br>고령동물도 안전하게</div></div>
+    <div class="pi"><div class="pin">04</div><div class="pit">치과 치료</div><div class="pid">4,000건+ 치과 경험<br>마취 안전성 최우선<br>고령동물의 상태를 고려한 진료</div></div>
   </div>
 </div>
 
@@ -1555,7 +1576,7 @@ body{animation:none!important;background:var(--cream)!important;}
       <div class="dc2 primary dental-card"><span class="dcic"><svg class="ic"><use href="#i-tooth"></use></svg></span><div class="dcn">치과 치료<span class="dbn">중점진료</span></div><div class="dcd">스케일링부터 발치, 치주 치료까지 전담 수의사가 담당합니다. 4,000건+ 경험, 마취 안전성 최우선.</div><div class="dctags"><span class="dct">스케일링</span><span class="dct">발치</span><span class="dct">치주치료</span></div><a class="dc-more" href="dental/">자세히 보기 →</a></div>
       <div class="dc2 primary checkup-card"><span class="dcic"><svg class="ic"><use href="#i-checkup"></use></svg></span><div class="dcn">건강검진 · 예방의학<span class="dbn">중점진료</span></div><div class="dcd">심장 특화 검진 포함 강아지·고양이 맞춤 검진 프로그램. 원장이 직접 분석한 리포트를 카카오톡으로 드립니다.</div><div class="dctags"><span class="dct">종합검진</span><span class="dct">심장검진</span><span class="dct">X-ray</span></div><a class="dc-more" href="checkup/">자세히 보기 →</a></div>
       <div class="dc2"><span class="dcic"><svg class="ic"><use href="#i-scope"></use></svg></span><div class="dcn">내시경<span class="dbn">중점진료</span></div><div class="dcd">위 내시경 검사 및 이물 제거. 개복 없이 정확하게 원인을 찾아냅니다.</div><div class="dctags"><span class="dct">위내시경</span><span class="dct">이물제거</span><span class="dct">소화기</span></div></div>
-      <div class="dc2"><span class="dcic"><svg class="ic"><use href="#i-leaf"></use></svg></span><div class="dcn">알러지 · 엑소좀 · 기능의학</div><div class="dcd">피부·식이 알러지 정밀 검사, 줄기세포 유래 엑소좀 치료로 근본적인 치유를 추구합니다.</div><div class="dctags"><span class="dct">알러지검사</span><span class="dct">엑소좀</span><span class="dct">기능의학</span></div></div>
+      <div class="dc2"><span class="dcic"><svg class="ic"><use href="#i-leaf"></use></svg></span><div class="dcn">알러지 · 엑소좀 · 기능의학</div><div class="dcd">피부·식이 알레르기 검사와 상태에 맞는 치료를 상담합니다.</div><div class="dctags"><span class="dct">알러지검사</span><span class="dct">엑소좀</span><span class="dct">기능의학</span></div></div>
       <div class="dc2"><span class="dcic"><svg class="ic"><use href="#i-scissors"></use></svg></span><div class="dcn">외과 수술</div><div class="dcd">중성화 수술부터 연부조직 외과 수술까지 다수 시행합니다. 안전한 마취 프로토콜 하에 진행합니다.</div><div class="dctags"><span class="dct">중성화</span><span class="dct">연부조직</span><span class="dct">외과</span></div></div>
       <div class="dc2 em-card"><span class="dcic"><svg class="ic"><use href="#i-emergency"></use></svg></span><div class="dcn">24시 응급 진료</div><div class="dcd">24시간 수의사 상주. 밤·새벽에도 언제든 응급 진료가 가능합니다. 365일 망설이지 마시고 전화 주세요.</div><div class="dctags"><span class="dct">24시간</span><span class="dct">응급처치</span><span class="dct">야간 · 공휴일</span></div><a class="dc-more" href="emergency/">자세히 보기 →</a></div>
     </div>
@@ -1577,7 +1598,7 @@ body{animation:none!important;background:var(--cream)!important;}
     </div>
     <div class="ck-cards rev rd">
       <div class="ck-card featured"><div class="ck-card-ico"><svg class="ic"><use href="#i-checkup"></use></svg></div><h3 class="ck-card-title">건강검진 프로그램</h3><div class="ck-card-bar"></div><p class="ck-card-desc">혈액·영상·초음파를 통한 종합 건강 스크리닝. 베이직·스페셜·프리미엄 3단계로 운영합니다.</p><div class="ck-btns"><a href="https://blog.naver.com/hwrat/224231670220" target="_blank" class="ck-btn dog"><svg class="ic"><use href="#i-dog"></use></svg> 강아지 검진 안내</a><a href="https://blog.naver.com/hwrat/224232611162" target="_blank" class="ck-btn cat"><svg class="ic"><use href="#i-cat"></use></svg> 고양이 검진 안내</a></div></div>
-      <div class="ck-card heart"><div class="ck-card-ico"><svg class="ic"><use href="#i-heart"></use></svg></div><h3 class="ck-card-title">심장 건강검진</h3><div class="ck-card-bar"></div><p class="ck-card-desc">심장 초음파(에코) 중점 진료. 무증상기에 발견하는 것이 치료의 전부입니다. 심장 특화 검진.</p></div>
+      <div class="ck-card heart"><div class="ck-card-ico"><svg class="ic"><use href="#i-heart"></use></svg></div><h3 class="ck-card-title">심장 건강검진</h3><div class="ck-card-bar"></div><p class="ck-card-desc">심장 초음파(에코) 중점 진료. 검사 결과와 현재 상태를 함께 살펴 관리 방향을 안내합니다. 심장 특화 검진.</p></div>
       <div class="ck-card"><div class="ck-card-ico"><svg class="ic"><use href="#i-dna"></use></svg></div><h3 class="ck-card-title">정밀 추가검사</h3><div class="ck-card-bar"></div><p class="ck-card-desc">지연형 알레르기(IgG), VDI 종양 검사 등 선택 추가검사로 더 깊이 확인합니다.</p></div>
     </div>
     <div class="ck-cta rev">
@@ -1833,9 +1854,10 @@ body{animation:none!important;background:var(--cream)!important;}
 </footer>
 
 <!-- FLOATERS -->
-<div class="floaters">
+<div class="floaters fb3">
   <a href="https://pf.kakao.com/_xfkxekM/chat" target="_blank" class="fb fk"><svg class="ic"><use href="#i-chat"></use></svg> 카카오 상담</a>
-  <a href="tel:031-717-7558" class="fb ft2"><svg class="ic"><use href="#i-phone"></use></svg> 031-717-7558</a>
+  <a href="https://naver.me/xKyevLBK" target="_blank" rel="noopener" class="fb fnv" aria-label="일반 진료 네이버 예약"><b>N</b> 네이버 예약</a>
+  <a href="tel:031-717-7558" class="fb ft2"><svg class="ic"><use href="#i-phone"></use></svg> <span class="fbw">031-717-7558</span><span class="fbm">전화 예약</span></a>
 </div>
 
 <script>
