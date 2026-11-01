@@ -2,6 +2,8 @@
 [build]
   publish = "site"
   command = ""
+  # site/ 가 안 바뀐 push(문서만 수정 등)는 배포를 건너뜀 → 크레딧(배포 1회 15) 절약
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- site/"
 
 # 캐시: HTML은 항상 최신, 이미지/아이콘은 1주일
 [[headers]]
